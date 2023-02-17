@@ -74,7 +74,7 @@ async function run(){
             console.log(result);
             res.send(ssregi);
         })
-        // ............ Khaulna School
+        // ............ Khulna School
 
         app.get( '/allksregi', async (req, res) =>{
             const cursor = khulnas.find({});
