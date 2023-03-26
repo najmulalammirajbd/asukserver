@@ -16,6 +16,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run(){
     try{
+        const Aspokb = client.db("ASDB").collection("Aspokb");
+        
         const dhakas = client.db("SGDB").collection("Dhakas");
         const chattograms = client.db("SGDB").collection("Chattograms");
         const sylhets = client.db("SGDB").collection("Sylhets");
@@ -35,6 +37,20 @@ async function run(){
         const mymensinghc = client.db("SGDB").collection("Mymensinghc");
 
         const spregi = client.db("SGDB").collection("Preregi");
+        // ............ Arabic Spoking Basic
+
+        app.get( '/asb', async (req, res) =>{
+            const cursor = Aspokb.find({});
+            const asb = await cursor.toArray();
+            res.send(asb);
+        });
+        app.post('/asbi', async (req, res) => {
+            const asb = req.body;
+            const result = await Aspokb.insertOne(asb);
+            console.log(result);
+            res.send(asb);
+        })
+
           // ............ Dhaka School
 
         app.get( '/alldsregi', async (req, res) =>{
