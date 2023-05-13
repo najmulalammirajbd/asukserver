@@ -16,6 +16,16 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run(){
     try{
+        const Eman = client.db("ASUKDB").collection("Eman");
+        const Salah = client.db("ASUKDB").collection("Salah");
+        const Zakat = client.db("ASUKDB").collection("Zakat");
+        const Sawm = client.db("ASUKDB").collection("Sawm");
+        const Hajj = client.db("ASUKDB").collection("Hajj");
+        const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
+
+
+
+
         const Aspokb = client.db("ASDB").collection("Aspokb");
         
         const dhakas = client.db("SGDB").collection("Dhakas");
@@ -37,6 +47,88 @@ async function run(){
         const mymensinghc = client.db("SGDB").collection("Mymensinghc");
 
         const spregi = client.db("SGDB").collection("Preregi");
+
+
+        // ............ Eman
+
+        app.get( '/eman', async (req, res) =>{
+            const cursor = Eman.find({});
+            const aseman = await cursor.toArray();
+            res.send(aseman);
+        });
+        app.post('/emandb', async (req, res) => {
+            const aseman = req.body;
+            const result = await Eman.insertOne(aseman);
+            console.log(result);
+            res.send(aseman);
+        })
+        // ............ Salah
+
+        app.get( '/salah', async (req, res) =>{
+            const cursor = Salah.find({});
+            const assalah = await cursor.toArray();
+            res.send(assalah);
+        });
+        app.post('/salahdb', async (req, res) => {
+            const assalah = req.body;
+            const result = await Salah.insertOne(assalah);
+            console.log(result);
+            res.send(assalah);
+        })
+        // ............ Zakat
+
+        app.get( '/zakat', async (req, res) =>{
+            const cursor = Zakat.find({});
+            const aszakat = await cursor.toArray();
+            res.send(aszakat);
+        });
+        app.post('/zakatdb', async (req, res) => {
+            const aszakat = req.body;
+            const result = await Zakat.insertOne(aszakat);
+            console.log(result);
+            res.send(aszakat);
+        })
+        // ............ Sawm
+
+        app.get( '/sawm', async (req, res) =>{
+            const cursor = Sawm.find({});
+            const assawm = await cursor.toArray();
+            res.send(assawm);
+        });
+        app.post('/sawmdb', async (req, res) => {
+            const assawm = req.body;
+            const result = await Sawm.insertOne(assawm);
+            console.log(result);
+            res.send(assawm);
+        })
+        // ............ Hajj
+
+        app.get( '/hajj', async (req, res) =>{
+            const cursor = Hajj.find({});
+            const ashajj = await cursor.toArray();
+            res.send(ashajj);
+        });
+        app.post('/hajjdb', async (req, res) => {
+            const ashajj = req.body;
+            const result = await Hajj.insertOne(ashajj);
+            console.log(result);
+            res.send(ashajj);
+        })
+        // ............ Islamic Blog
+
+        app.get( '/islamicblog', async (req, res) =>{
+            const cursor = IslamicBlog.find({});
+            const asislamicblog = await cursor.toArray();
+            res.send(asislamicblog);
+        });
+        app.post('/islamicblogdb', async (req, res) => {
+            const asislamicblog = req.body;
+            const result = await IslamicBlog.insertOne(asislamicblog);
+            console.log(result);
+            res.send(asislamicblog);
+        })
+
+        
         // ............ Arabic Spoking Basic
 
         app.get( '/asb', async (req, res) =>{
@@ -277,7 +369,7 @@ async function run(){
 run().catch(err => console.error(err));
 
 app.get('/', (req, res) =>{
-    res.send('school ghor server is running');
+    res.send('AS UK');
 })
 
 app.listen(port, () =>{
