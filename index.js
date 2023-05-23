@@ -21,6 +21,7 @@ async function run(){
         const Zakat = client.db("ASUKDB").collection("Zakat");
         const Sawm = client.db("ASUKDB").collection("Sawm");
         const Hajj = client.db("ASUKDB").collection("Hajj");
+        const Taharat = client.db("ASUKDB").collection("Taharat");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
 
 
@@ -113,6 +114,19 @@ async function run(){
             const result = await Hajj.insertOne(ashajj);
             console.log(result);
             res.send(ashajj);
+        })
+        // ............ Taharat
+
+        app.get( '/taharat', async (req, res) =>{
+            const cursor = Taharat.find({});
+            const astaharat = await cursor.toArray();
+            res.send(astaharat);
+        });
+        app.post('/taharatdb', async (req, res) => {
+            const astaharat = req.body;
+            const result = await Taharat.insertOne(astaharat);
+            console.log(result);
+            res.send(astaharat);
         })
         // ............ Islamic Blog
 
