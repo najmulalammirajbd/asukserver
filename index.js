@@ -22,6 +22,7 @@ async function run(){
         const Sawm = client.db("ASUKDB").collection("Sawm");
         const Hajj = client.db("ASUKDB").collection("Hajj");
         const Taharat = client.db("ASUKDB").collection("Taharat");
+        const Podcast = client.db("ASUKDB").collection("Podcast");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
 
 
@@ -140,6 +141,19 @@ async function run(){
             const result = await IslamicBlog.insertOne(asislamicblog);
             console.log(result);
             res.send(asislamicblog);
+        })
+        // ............ AS PODCAST
+
+        app.get( '/podcast', async (req, res) =>{
+            const cursor = Podcast.find({});
+            const asPodcast = await cursor.toArray();
+            res.send(asPodcast);
+        });
+        app.post('/podcastdb', async (req, res) => {
+            const asPodcast = req.body;
+            const result = await Podcast.insertOne(asPodcast);
+            console.log(result);
+            res.send(asPodcast);
         })
 
         
