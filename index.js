@@ -24,6 +24,20 @@ async function run(){
         const Taharat = client.db("ASUKDB").collection("Taharat");
         const Podcast = client.db("ASUKDB").collection("Podcast");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
+        const ShortHadithForKids = client.db("ASUKDB").collection("ShortHadithForKids");
+        // ............ 40 Short Hadith For Kids
+
+        app.get( '/shorthadithforkids', async (req, res) =>{
+            const cursor = ShortHadithForKids.find({});
+            const asshorthadithforkids = await cursor.toArray();
+            res.send(asshorthadithforkids);
+        });
+        app.post('/shorthadithforkidsdb', async (req, res) => {
+            const asshorthadithforkids = req.body;
+            const result = await ShortHadithForKids.insertOne(asshorthadithforkids);
+            console.log(result);
+            res.send(asshorthadithforkids);
+        })
 
         // ............ Eman
 
