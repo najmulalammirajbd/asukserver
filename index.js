@@ -16,6 +16,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run(){
     try{
+        const CQuran = client.db("ASUKDB").collection("CQuran");
         const Eman = client.db("ASUKDB").collection("Eman");
         const Salah = client.db("ASUKDB").collection("Salah");
         const Zakat = client.db("ASUKDB").collection("Zakat");
@@ -25,6 +26,19 @@ async function run(){
         const Podcast = client.db("ASUKDB").collection("Podcast");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
         const ShortHadithForKids = client.db("ASUKDB").collection("ShortHadithForKids");
+        // ............ Course (Quran)
+
+        app.get( '/cquran', async (req, res) =>{
+            const cursor = CQuran.find({});
+            const asCQuran = await cursor.toArray();
+            res.send(asCQuran);
+        });
+        app.post('/cqurandb', async (req, res) => {
+            const asCQuran = req.body;
+            const result = await CQuran.insertOne(asCQuran);
+            console.log(result);
+            res.send(asCQuran);
+        })
         // ............ 40 Short Hadith For Kids
 
         app.get( '/shorthadithforkids', async (req, res) =>{
