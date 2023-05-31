@@ -1,2 +1,1 @@
-# sgserver
-# schoolghorappserver
+# AS UK SERVER
