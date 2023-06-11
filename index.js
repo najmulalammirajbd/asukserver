@@ -25,9 +25,7 @@ async function run(){
         const Taharat = client.db("ASUKDB").collection("Taharat");
         const Podcast = client.db("ASUKDB").collection("Podcast");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
-        const ShortHadithForKids = client.db("ASUKDB").collection("ShortHadithForKids");
-        const ShortHadithForWoman = client.db("ASUKDB").collection("ShortHadithForWoman");
-        const ShortHadithForMen = client.db("ASUKDB").collection("ShortHadithForMen");
+        const ExclusiveHadith = client.db("ASUKDB").collection("ExclusiveHadith");
         // ............ Course (Quran)
 
         app.get( '/cquran', async (req, res) =>{
@@ -41,45 +39,19 @@ async function run(){
             console.log(result);
             res.send(asCQuran);
         })
-        // ............ 40 Short Hadith For Kids
+       // ............ Exclusive Hadith
 
-        app.get( '/shorthadithforkids', async (req, res) =>{
-            const cursor = ShortHadithForKids.find({});
-            const asshorthadithforkids = await cursor.toArray();
-            res.send(asshorthadithforkids);
-        });
-        app.post('/shorthadithforkidsdb', async (req, res) => {
-            const asshorthadithforkids = req.body;
-            const result = await ShortHadithForKids.insertOne(asshorthadithforkids);
-            console.log(result);
-            res.send(asshorthadithforkids);
-        })
-        // ............ 40 Short Hadith For Woman
-
-        app.get( '/shorthadithforwoman', async (req, res) =>{
-            const cursor = ShortHadithForWoman.find({});
-            const asshorthadithforwoman = await cursor.toArray();
-            res.send(asshorthadithforwoman);
-        });
-        app.post('/shorthadithforwomandb', async (req, res) => {
-            const asshorthadithforwoman = req.body;
-            const result = await ShortHadithForWoman.insertOne(asshorthadithforwoman);
-            console.log(result);
-            res.send(asshorthadithforwoman);
-        })
-        // ............ 40 Short Hadith For Men
-
-        app.get( '/shorthadithformen', async (req, res) =>{
-            const cursor = ShortHadithForMen.find({});
-            const asshorthadithformen = await cursor.toArray();
-            res.send(asshorthadithformen);
-        });
-        app.post('/shorthadithformendb', async (req, res) => {
-            const asshorthadithformen = req.body;
-            const result = await ShortHadithForMen.insertOne(asshorthadithformen);
-            console.log(result);
-            res.send(asshorthadithformen);
-        })
+       app.get( '/exclusivehadith', async (req, res) =>{
+        const cursor = ExclusiveHadith.find({});
+        const asExclusiveHadith = await cursor.toArray();
+        res.send(asExclusiveHadith);
+    });
+    app.post('/exclusivehadithdb', async (req, res) => {
+        const asExclusiveHadith = req.body;
+        const result = await ExclusiveHadith.insertOne(asExclusiveHadith);
+        console.log(result);
+        res.send(asExclusiveHadith);
+    })
 
         // ............ Eman
 
