@@ -25,6 +25,7 @@ async function run(){
         const Taharat = client.db("ASUKDB").collection("Taharat");
         const Podcast = client.db("ASUKDB").collection("Podcast");
         const IslamicBlog = client.db("ASUKDB").collection("IslamicBlog");
+        const ExclusiveVerse = client.db("ASUKDB").collection("ExclusiveVerse");
         const ExclusiveHadith = client.db("ASUKDB").collection("ExclusiveHadith");
         // ............ Course (Quran)
 
@@ -39,6 +40,19 @@ async function run(){
             console.log(result);
             res.send(asCQuran);
         })
+        // ............ Exclusive Verse
+
+       app.get( '/exclusiveverse', async (req, res) =>{
+        const cursor = ExclusiveVerse.find({});
+        const asExclusiveVerse = await cursor.toArray();
+        res.send(asExclusiveVerse);
+    });
+    app.post('/exclusiveversedb', async (req, res) => {
+        const asExclusiveVerse = req.body;
+        const result = await ExclusiveVerse.insertOne(asExclusiveVerse);
+        console.log(result);
+        res.send(asExclusiveVerse);
+    })
        // ............ Exclusive Hadith
 
        app.get( '/exclusivehadith', async (req, res) =>{
